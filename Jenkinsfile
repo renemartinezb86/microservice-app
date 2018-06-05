@@ -10,8 +10,7 @@ pipeline {
       steps {
         echo 'Setting up maven'
         sh '''echo $M2_HOME
-export PATH=${M2_HOME}/bin:${PATH}
-mvn clean'''
+export PATH=${M2_HOME}/bin:${PATH}'''
       }
     }
   }
