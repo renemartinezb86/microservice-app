@@ -10,11 +10,13 @@ pipeline {
       agent any
       steps {
         echo 'Setting up maven'
-        sh 'mvn --version'
+        sh '''java -version
+mvn --version
+docker --version'''
         echo 'Maven build'
         sh '''cd microservice
-docker --version
-mvn clean'''
+mvn clean
+mvn package'''
       }
     }
   }
