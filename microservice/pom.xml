@@ -536,7 +536,7 @@
                 <version>${dockerfile-maven-plugin.version}</version>
                 <!--
                 Uncomment the section below to build the docker image with mvn package and and push it with mvn deploy
-                -->
+
                 <executions>
                     <execution>
                         <id>default</id>
@@ -546,6 +546,7 @@
                         </goals>
                     </execution>
                 </executions>
+                -->
                 <configuration>
                     <repository>microservice</repository>
                     <tag>latest</tag>
