@@ -14,7 +14,8 @@ pipeline {
 mvn --version
 docker --version'''
         echo 'Maven build'
-        sh '''cd microservice
+        sh '''export DOCKER_HOST="tcp://127.0.0.1:2375"
+cd microservice
 mvn clean
 mvn package'''
       }
