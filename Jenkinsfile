@@ -17,7 +17,9 @@ docker --version'''
         sh '''export DOCKER_HOST="tcp://127.0.0.1:2375"
 cd microservice
 mvn clean
-mvn package'''
+mvn validate
+mvn compile
+mvn test'''
       }
     }
   }
