@@ -9,8 +9,7 @@ pipeline {
     stage('Build') {
       agent any
       environment {
-        M2_HOME = '/usr/local/apache-maven-3.5.3'
-        PATH = '${M2_HOME}/bin:${PATH}'
+        PATH = '/usr/local/apache-maven-3.5.3/bin:${PATH}'
       }
       steps {
         echo 'Setting up maven'
