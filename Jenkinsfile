@@ -13,6 +13,10 @@ pipeline {
 export M2_HOME=/usr/local/apache-maven-3.5.3
 echo $M2_HOME
 export PATH=${M2_HOME}/bin:${PATH}'''
+        echo 'Maven build'
+        sh '''cd microservice
+mvn clean
+mvn package'''
       }
     }
   }
