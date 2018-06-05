@@ -8,9 +8,6 @@ pipeline {
     }
     stage('Build') {
       agent any
-      environment {
-        PATH = '/usr/local/apache-maven-3.5.3/bin:${PATH}'
-      }
       steps {
         echo 'Setting up maven'
         sh '''export JAVA_HOME=/usr/lib/jvm/java-1.8.0
