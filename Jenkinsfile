@@ -4,13 +4,12 @@ pipeline {
     stage('Initialize') {
       steps {
         echo 'Initializing pipeline'
-        git(url: 'https://github.com/renemartinezb86/microservice-app', poll: true)
+        git(url: 'https://github.com/renemartinezb86/microservice-app', poll: true, changelog: true, branch: 'master')
       }
     }
     stage('Build') {
       steps {
-        sh '''sh mvn clean
-sh mvn package'''
+        sh 'pwd'
       }
     }
   }
