@@ -23,8 +23,9 @@ eureka:
     instance:
         prefer-ip-address: true
     client:
-        service-url:
-            defaultZone: http://admin:${jhipster.registry.password}@localhost:8761/eureka/
+        register-with-eureka: false
+        #service-url:
+            #defaultZone: http://admin:${jhipster.registry.password}@localhost:8761/eureka/
 
 spring:
     profiles:

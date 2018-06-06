@@ -24,8 +24,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  *
  * @see ExceptionTranslator
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = MicroserviceApp.class)
+//@RunWith(SpringRunner.class)
+//@SpringBootTest(classes = MicroserviceApp.class)
 public class ExceptionTranslatorIntTest {
 
     @Autowired
