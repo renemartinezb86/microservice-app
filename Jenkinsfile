@@ -66,7 +66,7 @@ mvn sonar:sonar \\
     stage('Docker') {
       steps {
         sh '''export DOCKER_HOST="tcp://127.0.0.1:2375"
-docker-compose --version'''
+/usr/local/bin/docker-compose --version'''
       }
     }
   }
