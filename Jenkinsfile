@@ -54,6 +54,14 @@ ls target/gatling/results'''
 
       }
     }
+    stage('Sonar') {
+      steps {
+        echo 'Sonar Test'
+        sh '''cd microservice
+mvn sonar:sonar'''
+        waitForQualityGate true
+      }
+    }
     stage('Docker') {
       steps {
         sh '''export DOCKER_HOST="tcp://127.0.0.1:2375"
