@@ -61,13 +61,12 @@ ls target/gatling/results'''
 mvn sonar:sonar \\
   -Dsonar.host.url=http://demo.setit.cl:9002 \\
   -Dsonar.login=bf4e8cd87ffb7ee90e781cf5071c88c80cd927ca'''
-        waitForQualityGate true
       }
     }
     stage('Docker') {
       steps {
         sh '''export DOCKER_HOST="tcp://127.0.0.1:2375"
-docker ps'''
+docker-compose --version'''
       }
     }
   }
