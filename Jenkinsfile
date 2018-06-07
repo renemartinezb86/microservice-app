@@ -64,12 +64,6 @@ mvn sonar:sonar \\
       }
     }
     stage('Docker') {
-      agent {
-        docker {
-          image 'rbravet/microservice'
-        }
-
-      }
       steps {
         sh '''export DOCKER_HOST="tcp://127.0.0.1:2375"
 /usr/local/bin/docker-compose --version
