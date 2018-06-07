@@ -22,8 +22,8 @@ mvn -Pprod clean package'''
       steps {
         echo 'Running test'
         sh '''cd microservice
-mvn test
-mvn gatling:execute
+/*mvn test
+mvn gatling:execute*/
 pwd
 mv target/gatling/results/*/productgatlingtest*/* target/gatling/results
 ls target/gatling/results'''
@@ -58,9 +58,9 @@ ls target/gatling/results'''
       steps {
         echo 'Sonar Test'
         sh '''cd microservice
-mvn sonar:sonar \\
+/*mvn sonar:sonar \\
   -Dsonar.host.url=http://demo.setit.cl:9002 \\
-  -Dsonar.login=bf4e8cd87ffb7ee90e781cf5071c88c80cd927ca'''
+  -Dsonar.login=bf4e8cd87ffb7ee90e781cf5071c88c80cd927ca*/'''
       }
     }
     stage('Docker') {
@@ -68,14 +68,16 @@ mvn sonar:sonar \\
         sh '''export DOCKER_HOST="tcp://127.0.0.1:2375"
 /usr/local/bin/docker-compose --version
 cd microservice
+docker-compose -f src/main/docker/app.yml up -d
+docker commit docker_microservice-app_1 rbravet/microservice
 '''
         script {
           docker.withRegistry('https://index.docker.io/v1/', 'docker_rbravet') {
-
-            def customImage = docker.build("rbravet/microservice")
-
-            /* Push the container to the custom Registry */
-            customImage.push()
+            /* def customImage = docker.build("rbravet/microservice")
+            Push the container to the custom Registry
+            customImage.push()*/
+            sh 'docker tag rbravet/microservice rbravet/microservice'
+            sh 'docker push rbravet/microservice'
           }
         }
 
