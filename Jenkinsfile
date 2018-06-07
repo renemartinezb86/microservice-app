@@ -68,8 +68,17 @@ mvn sonar:sonar \\
         sh '''export DOCKER_HOST="tcp://127.0.0.1:2375"
 /usr/local/bin/docker-compose --version
 cd microservice
-/usr/local/bin/docker-compose up -f src/main/docker/app.yml -d
-docker commit docker_microservice-app_1 rbravet/microservice'''
+'''
+        script {
+          docker.withRegistry('https://index.docker.io/v1/', 'docker_rbravet') {
+
+            def customImage = docker.build("rbravet/microservice")
+
+            /* Push the container to the custom Registry */
+            customImage.push()
+          }
+        }
+
       }
     }
   }
