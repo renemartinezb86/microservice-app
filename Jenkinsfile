@@ -22,8 +22,6 @@ mvn -Pprod clean package'''
       steps {
         echo 'Running test'
         sh '''cd microservice
-/*mvn test
-mvn gatling:execute*/
 pwd
 mv target/gatling/results/*/productgatlingtest*/* target/gatling/results
 ls target/gatling/results'''
@@ -57,10 +55,7 @@ ls target/gatling/results'''
     stage('Sonar') {
       steps {
         echo 'Sonar Test'
-        sh '''cd microservice
-/*mvn sonar:sonar \\
-  -Dsonar.host.url=http://demo.setit.cl:9002 \\
-  -Dsonar.login=bf4e8cd87ffb7ee90e781cf5071c88c80cd927ca*/'''
+        sh 'cd microservice'
       }
     }
     stage('Docker') {
