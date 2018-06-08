@@ -68,7 +68,7 @@ mvn sonar:sonar \\
         sh '''export DOCKER_HOST="tcp://127.0.0.1:2375"
 /usr/local/bin/docker-compose --version
 cd microservice
-docker-compose -f src/main/docker/app.yml up -d
+/usr/local/bin/docker-compose -f src/main/docker/app.yml up -d
 docker commit docker_microservice-app_1 rbravet/microservice
 '''
         script {
