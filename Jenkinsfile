@@ -59,7 +59,7 @@ ls target/gatling/results'''
         echo 'Sonar Test'
         sh '''cd microservice
 mvn sonar:sonar \\
-  -Dsonar.host.url=http://demo.setit.cl:9002 \\
+  -Dsonar.host.url=http://localhost:9002 \\
   -Dsonar.login=bf4e8cd87ffb7ee90e781cf5071c88c80cd927ca'''
       }
     }
