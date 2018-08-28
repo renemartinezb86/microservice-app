@@ -1,7 +1,7 @@
 version: '2'
 services:
     microservice-app:
-        image: rbravet/microservice
+        image: microservice
         environment:
             - SPRING_PROFILES_ACTIVE=prod,swagger
             - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka
