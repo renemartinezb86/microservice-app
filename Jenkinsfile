@@ -16,14 +16,14 @@ mvn --version'''
         sh '''pwd
 ls'''
         echo 'Maven build'
-        sh 'mvn -f microservice-app/pom.xml clean package -Dspring.profiles.active=dev'
+        sh 'mvn clean package -Dspring.profiles.active=dev'
       }
     }
     stage('Test') {
       steps {
         echo 'Running test'
-        sh '''mvn -f microservice-app/pom.xml test
-mvn -f microservice-app/pom.xml gatling:execute
+        sh '''mvn test
+mvn gatling:execute
 pwd
 mv target/gatling/results/*/productgatlingtest*/* target/gatling/results
 ls target/gatling/results'''
