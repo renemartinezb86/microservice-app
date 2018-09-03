@@ -11,11 +11,9 @@ pipeline {
       steps {
         echo 'Testing ENV'
         sh '''java -version
-mvn --version
-docker --version
-git --version'''
+mvn --version'''
         echo 'Git checkout'
-        sh 'git clone https://github.com/renemartinezb86/microservice-app.git /opt/bitnami/apps/jenkins/jenkins_home/microservice'
+        sh 'pwd'
         echo 'Maven build'
         sh 'mvn -f /opt/bitnami/apps/jenkins/jenkins_home/microservice/pom.xml clean package -Dspring.profiles.active=dev'
       }
@@ -64,6 +62,6 @@ ls target/gatling/results'''
   tools {
     maven 'Maven 3.5'
     jdk 'JDK 8'
-	git 'Default'
+    git 'Default'
   }
 }
