@@ -13,17 +13,17 @@ pipeline {
         sh '''java -version
 mvn --version
 docker --version'''
+        echo 'Git checkout'
+        sh 'git clone https://github.com/renemartinezb86/microservice-app.git /opt/bitnami/apps/jenkins/jenkins_home/microservice'
         echo 'Maven build'
-        sh '''cd microservice
-mvn -Pprod clean package'''
+        sh 'mvn -f /opt/bitnami/apps/jenkins/jenkins_home/microservice/pom.xml clean package -Dspring.profiles.active=dev'
       }
     }
     stage('Test') {
       steps {
         echo 'Running test'
-        sh '''cd microservice
-mvn test
-mvn gatling:execute
+        sh '''mvn -f /opt/bitnami/apps/jenkins/jenkins_home/microservice/pom.xml test
+mvn -f /opt/bitnami/apps/jenkins/jenkins_home/microservice/pom.xml gatling:execute
 pwd
 mv target/gatling/results/*/productgatlingtest*/* target/gatling/results
 ls target/gatling/results'''
@@ -54,33 +54,9 @@ ls target/gatling/results'''
 
       }
     }
-    stage('Sonar') {
+    stage('Deploy') {
       steps {
-        echo 'Sonar Test'
-        sh '''cd microservice
-mvn sonar:sonar \\
-  -Dsonar.host.url=http://localhost:9001 \\
-  -Dsonar.login=bf4e8cd87ffb7ee90e781cf5071c88c80cd927ca'''
-      }
-    }
-    stage('Docker') {
-      steps {
-        sh '''export DOCKER_HOST="tcp://127.0.0.1:2375"
-/usr/local/bin/docker-compose --version
-cd microservice
-/usr/local/bin/docker-compose -f src/main/docker/app.yml up -d
-docker commit docker_microservice-app_1 rbravet/microservice
-'''
-        script {
-          docker.withRegistry('https://index.docker.io/v1/', 'docker_rbravet') {
-            /* def customImage = docker.build("rbravet/microservice")
-            Push the container to the custom Registry
-            customImage.push()*/
-            sh 'docker tag rbravet/microservice rbravet/microservice'
-            sh 'docker push rbravet/microservice'
-          }
-        }
-
+        echo 'Deploy'
       }
     }
   }
