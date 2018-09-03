@@ -13,16 +13,17 @@ pipeline {
         sh '''java -version
 mvn --version'''
         echo 'Git checkout'
-        sh 'pwd'
+        sh '''pwd
+ls'''
         echo 'Maven build'
-        sh 'mvn -f /opt/bitnami/apps/jenkins/jenkins_home/microservice/pom.xml clean package -Dspring.profiles.active=dev'
+        sh 'mvn -f microservice-app/pom.xml clean package -Dspring.profiles.active=dev'
       }
     }
     stage('Test') {
       steps {
         echo 'Running test'
-        sh '''mvn -f /opt/bitnami/apps/jenkins/jenkins_home/microservice/pom.xml test
-mvn -f /opt/bitnami/apps/jenkins/jenkins_home/microservice/pom.xml gatling:execute
+        sh '''mvn -f microservice-app/pom.xml test
+mvn -f microservice-app/pom.xml gatling:execute
 pwd
 mv target/gatling/results/*/productgatlingtest*/* target/gatling/results
 ls target/gatling/results'''
